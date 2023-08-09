@@ -14,22 +14,31 @@ int main(void){
 		}
 		else{
 			ranText[ranCount] = ci;
-			ranText[ranCount + 1] = (char)count+48;
-			ranCount += 2;
-			
+			ranCount++;
+			int numDig = (int) log10((double) count) + 1;
+			for(int i = 0; i < numDig; i++){
+				ranText[ranCount] = (char) (count / pow(10, numDig - 1 - i)) + '0';
+				ranCount++;
+				count %= (int)pow(10, numDig - 1 - i);
+			}
+
 			ci = plainText[i];
 			count = 1;
 		}
 	}
-	
+
+
 	ranText[ranCount] = ci;
 	ranCount++;
-	int numDig = (int)log_10((double)count);
+	int numDig = (int) log10((double) count) + 1;
 	for(int i = 0; i < numDig; i++){
-		ranText[ranCount] = (char)//ここまで
+		ranText[ranCount] = (char) (count / pow(10, numDig - 1 - i)) + '0';
+		ranCount++;
+		count %= (int)pow(10, numDig - 1 - i);
+	}
 
-	ranText[ranCount + 1] = (char)count+48;
-	
+	ranText[ranCount] = 0;
+	ranCount++;
 
 	printf("%s\n",ranText);
 
